@@ -51,11 +51,11 @@ class StudentVaccination(models.Model):
     """
     Student model added here
     """
-    student = models.ForeignKey(Student, on_delete=models.DO_NOTHING, many=False)
+    student = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
     vaccinationDate = models.DateTimeField()
     dosage = models.PositiveIntegerField(default=1)
     vaccinationStatus = models.CharField(max_length=32)
-    vaccine = models.ForeignKey(Vaccine, on_delete=models.DO_NOTHING, many=False)
+    vaccine = models.ForeignKey(Vaccine, on_delete=models.DO_NOTHING)
 
     class Meta:
         """
