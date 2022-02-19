@@ -51,11 +51,11 @@ class StudentVaccination(models.Model):
     """
     Student model added here
     """
-    student = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
+    student = models.ForeignKey(Student, on_delete=models.DO_NOTHING, related_name="student")
     vaccinationDate = models.DateTimeField()
     dosage = models.PositiveIntegerField(default=1)
     vaccinationStatus = models.CharField(max_length=32)
-    vaccine = models.ForeignKey(Vaccine, on_delete=models.DO_NOTHING)
+    vaccine = models.ForeignKey(Vaccine, on_delete=models.DO_NOTHING, related_name="vaccine")
 
     class Meta:
         """
@@ -64,4 +64,3 @@ class StudentVaccination(models.Model):
 
     def __str__(self):
         return "{}".format(self.student)
-

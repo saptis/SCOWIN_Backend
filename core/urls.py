@@ -10,4 +10,5 @@ urlpatterns = [
     path('students/<int:pk>', StudentsDetails.as_view()),
     path('student-vaccination', StudentsVaccination.as_view()),
     path('student-vaccination/<int:pk>', StudentsVaccinationDetails.as_view()),
+    path('student-vaccination-metadata', StudentsVaccinationMetadata.as_view()),
 ]

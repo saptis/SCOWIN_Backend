@@ -30,16 +30,8 @@ class StudentSerializer(serializers.ModelSerializer):
         )
     
 class StudentVaccinationSerializer(serializers.ModelSerializer):
-    # student = serializers.PrimaryKeyRelatedField(
-    #     many=True, 
-    #     read_only=False
-    # )
-
-    # vaccine = serializers.PrimaryKeyRelatedField(
-    #     many=True, 
-    #     read_only=False
-    # )
-    # student = serializers.StudentSerializer()
+    student = StudentSerializer()
+    vaccine = VaccineSerializer()
     class Meta:
         model = StudentVaccination
         fields = (
@@ -50,4 +42,3 @@ class StudentVaccinationSerializer(serializers.ModelSerializer):
             'student',
             'vaccine'
         )
-        
