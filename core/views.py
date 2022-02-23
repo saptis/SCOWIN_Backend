@@ -19,6 +19,15 @@ class Students(ListCreateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data, many=isinstance(request.data, list))
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        results = Student.objects.all()
+        output_serializer = StudentSerializer(results, many=True)
+        data = output_serializer.data[:]
+        return Response(data)
+
 class StudentsDetails(RetrieveUpdateDestroyAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
@@ -38,3 +47,4 @@ class StudentsVaccinationMetadata(ListCreateAPIView):
         vaccinatedStudentCount = StudentVaccination.objects.all().count()
         upcomingVaccinationDrive = Vaccine.objects.filter(driveStatus='Upcoming').values()
         return Response({'registeredStudentCount': studentCount, 'vaccinatedStudentCount': vaccinatedStudentCount, 'upcomingVaccinationDrive': upcomingVaccinationDrive})
+

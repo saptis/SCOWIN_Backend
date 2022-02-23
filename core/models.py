@@ -1,7 +1,6 @@
 """
 Creating all models related to core here
 """
-from pyexpat import model
 from django.db import models
 
 # Create your models here.
