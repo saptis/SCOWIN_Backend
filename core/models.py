@@ -12,6 +12,7 @@ class Student(models.Model):
     id = models.CharField(primary_key=True, max_length=4)
     studentName = models.CharField(max_length=32)
     dob = models.DateTimeField()
+    #dob = models.DateField()
     gender = models.CharField(max_length=32)
     grade = models.CharField(max_length=2)
     section = models.CharField(max_length=1)
@@ -52,6 +53,7 @@ class StudentVaccination(models.Model):
     """
     student = models.ForeignKey(Student, on_delete=models.DO_NOTHING, related_name="student")
     vaccinationDate = models.DateTimeField()
+    #vaccinationDate = models.DateField()
     dosage = models.PositiveIntegerField(default=1)
     vaccinationStatus = models.CharField(max_length=32)
     vaccine = models.ForeignKey(Vaccine, on_delete=models.DO_NOTHING, related_name="vaccine")

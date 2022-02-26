@@ -1,6 +1,4 @@
-from pyexpat import model
-from django.shortcuts import render
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from .models import Vaccine, Student, StudentVaccination
 from core.serializers import VaccineSerializer, StudentSerializer, StudentVaccinationSerializer
 from rest_framework.response import Response
@@ -40,11 +38,16 @@ class StudentsVaccinationDetails(RetrieveUpdateDestroyAPIView):
     queryset = StudentVaccination.objects.all()
     serializer_class = StudentVaccinationSerializer
 
-class StudentsVaccinationMetadata(ListCreateAPIView):
-
-    def get(self, request):
+class StudentsVaccinationMetadata(ListAPIView):
+    def list(self, request, *args, **kwargs):
         studentCount = Student.objects.all().count()
         vaccinatedStudentCount = StudentVaccination.objects.all().count()
         upcomingVaccinationDrive = Vaccine.objects.filter(driveStatus='Upcoming').values()
-        return Response({'registeredStudentCount': studentCount, 'vaccinatedStudentCount': vaccinatedStudentCount, 'upcomingVaccinationDrive': upcomingVaccinationDrive})
 
+        out = {
+            'registeredStudentCount': studentCount,
+            'vaccinatedStudentCount': vaccinatedStudentCount,
+            'upcomingVaccinationDrive': upcomingVaccinationDrive,
+        }
+        return Response(out)    
+        
