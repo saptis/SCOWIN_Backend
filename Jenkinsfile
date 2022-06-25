@@ -13,16 +13,23 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh 'virtualenv env -p python3.5'
-                sh '. env/bin/activate'
-                sh 'env/bin/pip install -r requirements.txt'
-                sh 'env/bin/python3.5 manage.py test'
+                script {
+                    withPythonEnv('/usr/bin/python3.7'){
+		            sh 'pip3 install --no-cache-dir -r requirements.txt'
+		            sh 'python3 manage.py test'
+			        }
+		        }
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'python manage.py runserver'
+                script {
+                    withPythonEnv('/usr/bin/python3.7'){
+		            sh 'pip3 install --no-cache-dir -r requirements.txt'
+		            sh 'python3 manage.py runserver'
+			        }
+		        }
             }
         }
     }
