@@ -14,7 +14,7 @@ pipeline {
             steps {
                 echo 'Testing..'
                 script {
-                    withPythonEnv('/usr/bin/python3.7'){
+                    withPythonEnv('python'){
 		            sh 'pip3 install --no-cache-dir -r requirements.txt'
 		            sh 'python3 manage.py test'
 			        }
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 script {
-                    withPythonEnv('/usr/bin/python3.7'){
+                    withPythonEnv('python'){
 		            sh 'pip3 install --no-cache-dir -r requirements.txt'
 		            sh 'python3 manage.py runserver'
 			        }
