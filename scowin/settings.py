@@ -87,6 +87,10 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {    
+    'DEFAULT_PERMISSION_CLASSES': [],
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
