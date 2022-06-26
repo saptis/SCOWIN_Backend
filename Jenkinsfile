@@ -18,8 +18,8 @@ pipeline {
                 echo 'Deploying....'
                 script {
                     withPythonEnv('python'){
-		            sh 'pip3 install --no-cache-dir -r requirements.txt'
-		            sh 'python3 manage.py runserver'
+		            sh 'docker-compose build'
+		            sh 'docker-compose up'
 		        }
                 }
             }
