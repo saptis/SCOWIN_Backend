@@ -7,7 +7,7 @@ pipeline {
                 echo 'Building..'
                 withPythonEnv('python') {
                     sh 'rm -rf /home/scowin-api/'
-                    sh 'cp -Rf /var/jenkins_home/workspace/scowin-django /home/scowin-api'
+                    sh 'cp -Rf /var/jenkins_home/workspace/scowin-api /home/scowin-api'
                     sh 'cd /home/scowin-api'
                 }
             }
