@@ -6,7 +6,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 withPythonEnv('python') {
-                    sh 'rm -rf /home/scowin-api/'
+		    sh 'rm -rf /home/scowin-api/'
                     sh 'cp -Rf /var/jenkins_home/workspace/scowin-api /home/scowin-api'
                     sh 'cd /home/scowin-api'
                 }
@@ -34,11 +34,10 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 script {
-                    withPythonEnv('python'){
+                withPythonEnv('python'){
                 sh 'python3 manage.py makemigrations'
 			    sh 'python3 manage.py migrate'
-			    sh 'pkill -f runserver'
-			    sh 'python3 manage.py runserver 0.0.0.0:8000'
+			    sh 'nohup python3 manage.py runserver 0.0.0.0:8001 &'
 			   }
 		        }
             }
