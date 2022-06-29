@@ -2,6 +2,16 @@ pipeline {
     agent any
 
     stages {
+        stage('Copy to server') {
+            steps {
+                echo 'Building..'
+                withPythonEnv('python') {
+                    sh 'rm -rf /home/scowin-api/'
+                    sh 'cp -Rf /var/jenkins_home/workspace/scowin-django /home/scowin-api'
+                    sh 'cd /home/scowin-api'
+                }
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building..'
@@ -25,7 +35,7 @@ pipeline {
                 echo 'Deploying....'
                 script {
                     withPythonEnv('python'){
-		            sh 'python3 manage.py makemigrations'
+                sh 'python3 manage.py makemigrations'
 			    sh 'python3 manage.py migrate'
 			    sh 'pkill -f runserver'
 			    sh 'python3 manage.py runserver 0.0.0.0:8000'
