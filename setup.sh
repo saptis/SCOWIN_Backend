@@ -10,4 +10,4 @@ python3 manage.py test
 python3 manage.py makemigrations
 python3 manage.py migrate
 pkill -f runserver
-nohup python3 manage.py runserver 0.0.0.0:8081
+python3 manage.py runserver 0.0.0.0:8081 &
